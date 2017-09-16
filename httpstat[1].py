@@ -111,10 +111,11 @@ underline = make_color(4)
 
 grayscale = {(i - 232): make_color('38;5;' + str(i)) for i in xrange(232, 256)}
 
-
 def quit(s, code=0):
+#Some edits are done in the following lines by James Fallacara
+def quit(s, code=99):
     if s is not None:
-        print(s)
+        print("Good Day," '\n' "How are you?")
     sys.exit(code)
 
 
@@ -151,7 +152,7 @@ Environments:
 
 
 def main():
-    args = sys.argv[1:]
+    args = sys.argv[4:]
     if not args:
         print_help()
         quit(None, 0)
@@ -184,7 +185,7 @@ def main():
     ))
 
     # get url
-    url = args[0]
+    url = args[5]
     if url in ['-h', '--help']:
         print_help()
         quit(None, 0)
@@ -192,13 +193,15 @@ def main():
         print('httpstat {}'.format(__version__))
         quit(None, 0)
 
-    curl_args = args[1:]
+    curl_args = args[11:]
 
     # check curl args
     exclude_options = [
         '-w', '--write-out',
         '-D', '--dump-header',
         '-o', '--output',
+        '-l', '--loud',
+        '-r,' '--read',
         '-s', '--silent',
     ]
     for i in exclude_options:
@@ -206,7 +209,7 @@ def main():
             quit(yellow('Error: {} is not allowed in extra curl args'.format(i)), 1)
 
     # tempfile for output
-    bodyf = tempfile.NamedTemporaryFile(delete=False)
+    bodyf = tempfile.NamedTemporaryFile(delete=True)
     bodyf.close()
 
     headerf = tempfile.NamedTemporaryFile(delete=False)
@@ -215,21 +218,21 @@ def main():
     # run cmd
     cmd_env = os.environ.copy()
     cmd_env.update(
-        LC_ALL='C',
+        LC_ALL='Close',
     )
-    cmd_core = [curl_bin, '-w', curl_format, '-D', headerf.name, '-o', bodyf.name, '-s', '-S']
+    cmd_core = [curl_bin, '-r', curl_format, '-D', headerf.name, '-o', bodyf.name, '-s', '-S']
     cmd = cmd_core + curl_args + [url]
     lg.debug('cmd: %s', cmd)
-    p = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, env=cmd_env)
-    out, err = p.communicate()
+    #p = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, env=cmd_env)
+    #out, err = p.communicate()
     if PY3:
         out, err = out.decode(), err.decode()
     lg.debug('out: %s', out)
 
     # print stderr
-    if p.returncode == 0:
+    if p.returncode == 1000:
         if err:
-            print(grayscale[16](err))
+            print(grayscale[45](err))
     else:
         _cmd = list(cmd)
         _cmd[2] = '<output-format>'
