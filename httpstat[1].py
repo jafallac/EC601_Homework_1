@@ -55,10 +55,10 @@ curl_format = """{
 "time_pretransfer": %{time_pretransfer},
 "time_redirect": %{time_redirect},
 "time_starttransfer": %{time_starttransfer},
-"time_total": %{time_total},
 "speed_download": %{speed_download},
 "speed_upload": %{speed_upload},
 "remote_ip": "%{remote_ip}",
+"time_total": %{time_total},
 "remote_port": "%{remote_port}",
 "local_ip": "%{local_ip}",
 "local_port": "%{local_port}"
