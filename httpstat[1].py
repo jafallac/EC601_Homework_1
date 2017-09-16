@@ -5,6 +5,7 @@
 # https://curl.haxx.se/libcurl/c/curl_easy_getinfo.html
 # https://curl.haxx.se/libcurl/c/easy_getinfo_options.html
 # http://blog.kenweiner.com/2014/11/http-request-timings-with-curl.html
+# httpstat is a curl like tool, visualize http/https process and show the duration.
 
 from __future__ import print_function
 
