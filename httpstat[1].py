@@ -5,6 +5,7 @@
 # https://curl.haxx.se/libcurl/c/curl_easy_getinfo.html
 # https://curl.haxx.se/libcurl/c/easy_getinfo_options.html
 # http://blog.kenweiner.com/2014/11/http-request-timings-with-curl.html
+# httpstat is a curl like tool, visualize http/https process and show the duration.
 
 from __future__ import print_function
 
@@ -26,6 +27,7 @@ if PY3:
 
 
 # Env class is copied from https://github.com/reorx/getenv/blob/master/getenv.py
+# Env class is to define environment
 class Env(object):
     prefix = 'HTTPSTAT'
     _instances = []
@@ -53,10 +55,10 @@ curl_format = """{
 "time_pretransfer": %{time_pretransfer},
 "time_redirect": %{time_redirect},
 "time_starttransfer": %{time_starttransfer},
-"time_total": %{time_total},
 "speed_download": %{speed_download},
 "speed_upload": %{speed_upload},
 "remote_ip": "%{remote_ip}",
+"time_total": %{time_total},
 "remote_port": "%{remote_port}",
 "local_ip": "%{local_ip}",
 "local_port": "%{local_port}"
@@ -65,11 +67,11 @@ curl_format = """{
 https_template = """
   DNS Lookup   TCP Connection   TLS Handshake   Server Processing   Content Transfer
 [   {a0000}  |     {a0001}    |    {a0002}    |      {a0003}      |      {a0004}     ]
-             |                |               |                   |                  |
-    namelookup:{b0000}        |               |                   |                  |
-                        connect:{b0001}       |                   |                  |
-                                    pretransfer:{b0002}           |                  |
-                                                      starttransfer:{b0003}          |
+|            |                |               |                   |                  |
+|   namelookup:{b0000}        |               |                   |                  |
+|                       connect:{b0001}       |                   |                  |
+|                                  pretransfer:{b0002}           |                   |
+|                                                   starttransfer:{b0003}            |
                                                                                  total:{b0004}
 """[1:]
 
@@ -100,9 +102,9 @@ def make_color(code):
 red = make_color(31)
 green = make_color(32)
 yellow = make_color(33)
-blue = make_color(34)
-magenta = make_color(35)
-cyan = make_color(36)
+blue = make_color(31)
+magenta = make_color(30)
+cyan = make_color(35)
 
 bold = make_color(1)
 underline = make_color(4)
