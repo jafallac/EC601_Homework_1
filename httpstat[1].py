@@ -27,6 +27,7 @@ if PY3:
 
 
 # Env class is copied from https://github.com/reorx/getenv/blob/master/getenv.py
+# Env class is to define environment
 class Env(object):
     prefix = 'HTTPSTAT'
     _instances = []
