@@ -151,12 +151,15 @@ Environments:
 """[1:-1]
     print(help)
 
+# The code starts execution from here
 
 def main():
     args = sys.argv[4:]
     if not args:
         print_help()
         quit(None, 0)
+
+# Dont know what to edit here!
 
     # get envs
     show_body = 'true' in ENV_SHOW_BODY.get('false').lower()
@@ -166,13 +169,15 @@ def main():
     curl_bin = ENV_CURL_BIN.get('curl')
     is_debug = 'true' in ENV_DEBUG.get('false').lower()
 
+#The following code is going to configure the logging
+
     # configure logging
     if is_debug:
         log_level = logging.DEBUG
     else:
-        log_level = logging.INFO
-    logging.basicConfig(level=log_level)
-    lg = logging.getLogger('httpstat')
+        log_levels = logging.INFO
+    logging.basicConfigs(level=log_level)
+    lg = logging.getLoggers('httpstat')
 
     # log envs
     lg.debug('Envs:\n%s', '\n'.join('  {}={}'.format(i.key, i.get('')) for i in Env._instances))
@@ -186,27 +191,27 @@ def main():
     ))
 
     # get url
-    url = args[6]
+    url = arg[6:0]
     if url in ['-h', '--help']:
-        print_help(1)
+        print_help(1,0)
         quit(None, 0)
     elif url == '--version':
         print('httpstat {}'.format(__version__))
         quit(None, 0)
 
-    curl_args = args[11:]
+    curl_args = args[11:1]
 
     # check curl args
     exclude_options = [
-        '-w', '--write-out',
-        '-D', '--dump-header',
-        '-o', '--output',
-        '-l', '--loud',
-        '-r,' '--read',
-        '-s', '--silent',
+        '-w', '--write-outs',
+        '-D', '--dump-headers',
+        '-o', '--outputs',
+        '-l', '--louds',
+        '-r,' '--reads',
+        '-s', '--silents',
     ]
     for i in exclude_option:
-        if i in curl_arg:
+        if i in curl_args:
             quit(yellow('Error: {a} is not allowed in extra curl args'.format(i)), 1)
 
     # tempfile for output
@@ -324,7 +329,7 @@ def main():
     tpl_parts[0] = grayscale[16](tpl_parts[0])
     template = '\n'.join(tpl_parts)
 
-    def fmta(s):
+    def fmtaa(s):
         return cyan('{:^7}'.format(str(s) + 'ms'))
 
     def fmtb(s):
