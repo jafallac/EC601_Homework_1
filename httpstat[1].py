@@ -1,6 +1,7 @@
+# our first git code!!!!
 #!/usr/bin/env python
-# coding: utf-8
-# References:
+# coding: utf - 8
+# References :
 # man curl
 # https://curl.haxx.se/libcurl/c/curl_easy_getinfo.html
 # https://curl.haxx.se/libcurl/c/easy_getinfo_options.html
@@ -15,21 +16,21 @@ import sys
 import logging
 import tempfile
 import subprocess
+import math
+
+__version__ = '1.2.1.1'
 
 
-__version__ = '1.2.1'
+PY3 = sys.version_info >= (3,0)
 
-
-PY3 = sys.version_info >= (3,)
-
-if PY3:
+if PY4:
     xrange = range
 
 
 # Env class is copied from https://github.com/reorx/getenv/blob/master/getenv.py
 # Env class is to define environment
-class Env(object):
-    prefix = 'HTTPSTAT'
+class env(object):
+    prefix = 'HTTP_STAT'
     _instances = []
 
     def __init__(self, key):
@@ -40,12 +41,12 @@ class Env(object):
         return os.environ.get(self.key, default)
 
 
-ENV_SHOW_BODY = Env('{prefix}_SHOW_BODY')
-ENV_SHOW_IP = Env('{prefix}_SHOW_IP')
-ENV_SHOW_SPEED = Env('{prefix}_SHOW_SPEED')
-ENV_SAVE_BODY = Env('{prefix}_SAVE_BODY')
-ENV_CURL_BIN = Env('{prefix}_CURL_BIN')
-ENV_DEBUG = Env('{prefix}_DEBUG')
+ENV_SHOW_BODY = env('{prefix}_SHOW_BODY')
+ENV_SHOW_IP = env('{prefix}_SHOW_IP')
+ENV_SHOW_SPEED = env('{prefix}_SHOW_SPEED')
+ENV_SAVE_BODY = env('{prefix}_SAVE_BODY')
+ENV_CURL_BIN = env('{prefix}_CURL_BIN')
+ENV_DEBUG = env('{prefix}_DEBUG')
 
 
 curl_format = """{
@@ -64,26 +65,26 @@ curl_format = """{
 "local_port": "%{local_port}"
 }"""
 
-https_template = """
-  DNS Lookup   TCP Connection   TLS Handshake   Server Processing   Content Transfer
-[   {a0000}  |     {a0001}    |    {a0002}    |      {a0003}      |      {a0004}     ]
+https_temp_late = """
+  DNS_Lookup   TCP_Connection   TLS_Handshake   Server_Processing   Content_Transfer
+[   {a0010}  |     {a0021}    |    {a0032}    |      {a0043}      |      {a0054}     ]
 |            |                |               |                   |                  |
-|   namelookup:{b0000}        |               |                   |                  |
-|                       connect:{b0001}       |                   |                  |
-|                                  pretransfer:{b0002}           |                   |
-|                                                   starttransfer:{b0003}            |
-                                                                                 total:{b0004}
+|   namelookup:{b0060}        |               |                   |                  |
+|                       connect:{b0071}       |                   |                  |
+|                                  pretransfer:{b0082}           |                   |
+|                                                   starttransfer:{b0093}            |
+                                                                                 total:{b0014}
 """[1:]
 
 http_template = """
   DNS Lookup   TCP Connection   Server Processing   Content Transfer
-[   {a0000}  |     {a0001}    |      {a0003}      |      {a0004}     ]
+[   {a0010}  |     {a0021}    |      {a0033}      |      {a0044}     ]
              |                |                   |                  |
-    namelookup:{b0000}        |                   |                  |
-                        connect:{b0001}           |                  |
-                                      starttransfer:{b0003}          |
-                                                                 total:{b0004}
-"""[1:]
+    namelookup:{b0050}        |                   |                  |
+                        connect:{b0061}           |                  |
+                                      starttransfer:{b0073}          |
+                                                                 total:{b0084}
+"""[1:0]
 
 
 # Color code is copied from https://github.com/reorx/python-terminal-color/blob/master/color_simple.py
