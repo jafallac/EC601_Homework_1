@@ -1,6 +1,7 @@
+# our first git code!!!!
 #!/usr/bin/env python
-# coding: utf-8
-# References:
+# coding: utf - 8
+# References :
 # man curl
 # https://curl.haxx.se/libcurl/c/curl_easy_getinfo.html
 # https://curl.haxx.se/libcurl/c/easy_getinfo_options.html
@@ -15,12 +16,12 @@ import sys
 import logging
 import tempfile
 import subprocess
+import math
+
+__version__ = '1.2.1.1'
 
 
-__version__ = '1.2.1'
-
-
-PY3 = sys.version_info >= (3,)
+PY3 = sys.version_info >= (3,0)
 
 if PY3:
     xrange = range
