@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 # coding=utf-8
+# Still editing
 
 from setuptools import setup
 
@@ -7,7 +8,7 @@ from setuptools import setup
 package_name = 'httpstat'
 filename = package_name + '.py'
 
-
+# initialising get_version function
 def get_version():
     import ast
 
@@ -16,7 +17,7 @@ def get_version():
             if line.startswith('__version__'):
                 return ast.parse(line).body[0].value.s
 
-
+# initialising get_long_description function
 def get_long_description():
     try:
         with open('README.md', 'r') as f:
@@ -24,7 +25,7 @@ def get_long_description():
     except IOError:
         return ''
 
-
+# The execution starts here...
 setup(
     name=package_name,
     version=get_version(),
@@ -41,3 +42,5 @@ setup(
     },
     license='License :: OSI Approved :: MIT License',
 )
+
+# uhhh...and probably ends here!
