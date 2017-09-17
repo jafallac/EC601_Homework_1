@@ -329,7 +329,7 @@ def main():
     tpl_parts[0] = grayscale[16](tpl_parts[0])
     template = '\n'.join(tpl_parts)
 
-    def fmta(s):
+    def fmtaa(s):
         return cyan('{:^7}'.format(str(s) + 'ms'))
 
     def fmtb(s):
