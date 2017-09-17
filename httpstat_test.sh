@@ -61,6 +61,8 @@ for pybin in python python3; do
     HTTPSTAT_CURL_BIN=/usr/bin/curl HTTPSTAT_DEBUG=true main $http_url | grep -q '/usr/bin/curl'
     assert_exit 0
 
+# There are so many titles here
+
     title "HTTPSTAT_SHOW_IP"
     HTTPSTAT_SHOW_IP="true" main $http_url | grep -q 'Connected'
     assert_exit 0
@@ -69,6 +71,8 @@ for pybin in python python3; do
     HTTPSTAT_SHOW_BODY="true" main_silent httpbin.org/get -G --data-urlencode "a=中文"
     assert_exit 0
 
+# Added many comments to this program
+
     title "HTTPSTAT_SHOW_BODY=true, -G --data-urlencode \"a=中文\""
     HTTPSTAT_SHOW_BODY="true" main_silent httpbin.org/post -X POST --data-urlencode "a=中文"
     assert_exit 0
@@ -76,6 +80,8 @@ for pybin in python python3; do
     title "HTTPSTAT_SAVE_BODY=true"
     HTTPSTAT_SAVE_BODY=true main $http_url | grep -q 'stored in'
     assert_exit 0
+
+# The shell program just has all the frequently used commands in the terminal
 
     title "HTTPSTAT_SAVE_BODY=false"
     HTTPSTAT_SAVE_BODY=false HTTPSTAT_DEBUG=true main $http_url | grep -q 'rm body file'
