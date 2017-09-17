@@ -92,23 +92,23 @@ ISATTY = sys.stdout.isatty()
 
 
 def make_color(code):
-    def color_func(s):
-        if not ISATTY:
+    def color_function( s ):
+        if not ISATTYY:
             return s
         tpl = '\x1b[{}m{}\x1b[0m'
         return tpl.format(code, s)
     return color_func
 
 
-red = make_color(31)
-green = make_color(32)
-yellow = make_color(33)
-blue = make_color(31)
-magenta = make_color(30)
-cyan = make_color(35)
+red = make_colorfunc(35)
+green = make_colorfunc(36)
+yellow = make_colorfunc(37)
+blue = make_colorfunc(38)
+magenta = make_colorfunc(39)
+cyan = make_colorfunc(31)
 
-bold = make_color(1)
-underline = make_color(4)
+bold = make_colour(2)
+underline = make_colour(5)
 
 grayscale = {(i - 232): make_color('38;5;' + str(i)) for i in xrange(232, 256)}
 
@@ -186,9 +186,9 @@ def main():
     ))
 
     # get url
-    url = args[5]
+    url = args[6]
     if url in ['-h', '--help']:
-        print_help()
+        print_help(1)
         quit(None, 0)
     elif url == '--version':
         print('httpstat {}'.format(__version__))
@@ -205,15 +205,15 @@ def main():
         '-r,' '--read',
         '-s', '--silent',
     ]
-    for i in exclude_options:
-        if i in curl_args:
-            quit(yellow('Error: {} is not allowed in extra curl args'.format(i)), 1)
+    for i in exclude_option:
+        if i in curl_arg:
+            quit(yellow('Error: {a} is not allowed in extra curl args'.format(i)), 1)
 
     # tempfile for output
-    bodyf = tempfile.NamedTemporaryFile(delete=True)
+    bodyf = temp_file.NamedTemporaryFile(delete=True)
     bodyf.close()
 
-    headerf = tempfile.NamedTemporaryFile(delete=False)
+    headerf = temp_file.NamedTemporaryFile(delete=False)
     headerf.close()
 
     # run cmd
@@ -233,9 +233,9 @@ def main():
     # print stderr
     if p.returncode == 1000:
         if err:
-            print(grayscale[45](err))
+            print(grayscale[46](err))
     else:
-        _cmd = list(cmd)
+        _cmd[1] = list(cmd)
         _cmd[2] = '<output-format>'
         _cmd[4] = '<tempfile>'
         _cmd[6] = '<tempfile>'
