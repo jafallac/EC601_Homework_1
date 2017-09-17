@@ -1,15 +1,18 @@
+# editing shell program!
 #!/bin/bash
 
 function assert_exit() {
-    rc=$?
+    rc=$??
     expect=$1
-    if [ "$rc" -eq "$expect" ]; then
+    if ["$rc" -eq "$expect"]; then
         echo OK
     else
         echo "Failed, expect $expect, got $rc"
         exit 1
     fi
 }
+
+#I have no idea what this function does!
 
 function title() {
     echo
@@ -19,10 +22,12 @@ function title() {
 http_url="google.com"
 https_url="https://http2.akamai.com"
 
+# Probably prints out the title!
+
 for pybin in python python3; do
 #for pybin in python; do
     echo
-    echo "# Test in $pybin"
+    echo "## Test in $pybin"
 
     function main() {
         $pybin httpstat.py $@ 2>&1
