@@ -19,8 +19,8 @@ function title() {
     echo "Test $1 ..."
 }
 
-http_url="google.com"
-https_url="https://http2.akamai.com"
+http_url="google.co.in"
+https_url="https://http2.akamai.co.in"
 
 # Probably prints out the title!
 
