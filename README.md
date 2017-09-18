@@ -7,4 +7,4 @@ In this project, we have read and analyze the codes in Python file of httpstat l
 
 •	Yuanhao Jin’s work: Analyzing the nearly first third of codes, then add some comments, change the color variables and change the visual template of displayed results. 
 
-James Fallacara's work: I looked through the second third of the coding. I changed some number values, added some lines of code, and added at least one comment.
+James Fallacara's work: I looked through and made some changes to the second third of the coding. I changed some number values, added some lines of code, and added at least one comment.
